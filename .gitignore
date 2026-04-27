@@ -1,0 +1,38 @@
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# Published local app build
+app/assets/
+app/index.html
+app/favicon.svg
+app/icons.svg
+app/templates/
+
+# Runtime data
+uploads/*.xlsx
+uploads/*.xls
+logs/*.csv
+gerados/**/*.png
+gerados/**/*.jpg
+gerados/**/*.jpeg
+gerados/**/*.webp
+gerados/**/*.pdf
+
+# Keep folder structure
+!uploads/.gitkeep
+!logs/.gitkeep
+!gerados/.gitkeep
+
+# Temporary / local templates
+templates/teste-template.psd
+templates/diretoria-orig.png
+
+# Python cache
+automacao/__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
