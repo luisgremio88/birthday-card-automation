@@ -55,6 +55,7 @@ Nao e apenas um CRUD. E um sistema que automatiza uma tarefa administrativa conc
 - geracao da previa do cartao com nome dinamico
 - composicao do e-mail com imagem no corpo
 - historico de envios com acesso ao cartao gerado
+- todas as capturas do README usam dados ficticios
 
 ### Interface Screenshots
 

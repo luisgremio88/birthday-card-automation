@@ -37,29 +37,29 @@ const PROFILES = {
 const SAMPLE_ROWS = {
   associado: [
     {
-      nome: 'Paula da Silveira Delvalhas',
-      tabelionato: 'Tabelionato Pozo - Sao Vicente do Sul',
-      email: 'paula@email.com',
+      nome: 'Maria Exemplo',
+      tabelionato: 'Tabelionato Modelo - Cidade Exemplo',
+      email: 'maria.exemplo@empresa.com',
       data_aniversario: '27/04',
     },
     {
-      nome: 'Jorge Alberto Pozo Camargo',
-      tabelionato: 'Tabelionato Pozo - Sao Vicente do Sul',
-      email: 'jorge@email.com',
+      nome: 'Carlos Modelo',
+      tabelionato: 'Tabelionato Modelo - Cidade Exemplo',
+      email: 'carlos.modelo@empresa.com',
       data_aniversario: '27/04',
     },
   ],
   diretoria: [
     {
-      nome: 'Joao Ricardo Souza',
-      tabelionato: 'Diretoria CNB/RS',
-      email: 'joao.ricardo@email.com',
+      nome: 'Fernanda Exemplo',
+      tabelionato: 'Diretoria Institucional',
+      email: 'fernanda.exemplo@empresa.com',
       data_aniversario: '27/04',
     },
     {
-      nome: 'Mariana Costa Ferreira',
-      tabelionato: 'Diretoria CNB/RS',
-      email: 'mariana.ferreira@email.com',
+      nome: 'Roberto Modelo',
+      tabelionato: 'Diretoria Institucional',
+      email: 'roberto.modelo@empresa.com',
       data_aniversario: '05/05',
     },
   ],
@@ -70,8 +70,8 @@ const SAMPLE_HISTORY = {
     {
       timestamp: '2026-04-27T08:00:00',
       data_referencia: '27/04/2026',
-      nome: 'Paula da Silveira Delvalhas',
-      email: 'paula@email.com',
+      nome: 'Maria Exemplo',
+      email: 'maria.exemplo@empresa.com',
       status: 'enviado',
       detalhes: 'Cartao enviado com sucesso pelo Outlook.',
       arquivo_cartao_url: null,
@@ -79,8 +79,8 @@ const SAMPLE_HISTORY = {
     {
       timestamp: '2026-04-27T08:03:00',
       data_referencia: '27/04/2026',
-      nome: 'Jorge Alberto Pozo Camargo',
-      email: 'jorge@email.com',
+      nome: 'Carlos Modelo',
+      email: 'carlos.modelo@empresa.com',
       status: 'rascunho',
       detalhes: 'Rascunho aberto para conferencia.',
       arquivo_cartao_url: null,
@@ -90,8 +90,8 @@ const SAMPLE_HISTORY = {
     {
       timestamp: '2026-04-27T08:10:00',
       data_referencia: '27/04/2026',
-      nome: 'Joao Ricardo Souza',
-      email: 'joao.ricardo@email.com',
+      nome: 'Fernanda Exemplo',
+      email: 'fernanda.exemplo@empresa.com',
       status: 'enviado',
       detalhes: 'Parabens ao membro da Diretoria enviado com sucesso.',
       arquivo_cartao_url: null,
@@ -209,7 +209,7 @@ function App() {
   )
   const [previewCardUrl, setPreviewCardUrl] = useState('')
   const [templateVersion, setTemplateVersion] = useState(0)
-  const [senderEmail, setSenderEmail] = useState('luis.dias@cnbrs.org.br')
+  const [senderEmail, setSenderEmail] = useState('aniversarios@empresa.com')
   const [uploadStatus, setUploadStatus] = useState(
     isScreenshotMode ? 'Planilha salva com sucesso no perfil associado.' : '',
   )
@@ -220,7 +220,7 @@ function App() {
     isScreenshotMode ? 'Fluxo demonstrativo pronto para abrir rascunho ou enviar.' : '',
   )
   const [automationOutput, setAutomationOutput] = useState(
-    isScreenshotMode ? ['Paula da Silveira Delvalhas <paula@email.com>: enviado'] : [],
+    isScreenshotMode ? ['Maria Exemplo <maria.exemplo@empresa.com>: enviado'] : [],
   )
   const [isRunningAutomation, setIsRunningAutomation] = useState(false)
   const [historyItems, setHistoryItems] = useState(
@@ -491,8 +491,8 @@ function App() {
       )
       setAutomationOutput(
         mode === 'send'
-          ? ['Paula da Silveira Delvalhas <paula@email.com>: enviado']
-          : ['Paula da Silveira Delvalhas <paula@email.com>: rascunho'],
+          ? ['Maria Exemplo <maria.exemplo@empresa.com>: enviado']
+          : ['Maria Exemplo <maria.exemplo@empresa.com>: rascunho'],
       )
       return
     }
