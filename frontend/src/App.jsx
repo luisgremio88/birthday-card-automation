@@ -4,12 +4,14 @@ import './App.css'
 const REQUIRED_COLUMNS = ['nome', 'tabelionato', 'email', 'data_aniversario']
 const API_BASE = `http://${window.location.hostname}/projeto-aniversario/backend`
 const DEFAULT_PREVIEW_NAME = 'NOME DO ANIVERSARIANTE'
+const SCREENSHOT_MODE = new URLSearchParams(window.location.search).get('shot')
+const ASSET_BASE = import.meta.env.BASE_URL
 
 const PROFILES = {
   associado: {
     id: 'associado',
     label: 'Associado',
-    templatePath: '/templates/cartao-associado.png',
+    templatePath: `${ASSET_BASE}templates/cartao-associado.png`,
     templateHint: 'templates/cartao_base_limpo_associado.png',
     subject: 'Feliz aniversario Associado',
     bodyTitle: 'Feliz aniversario',
@@ -21,7 +23,7 @@ const PROFILES = {
   diretoria: {
     id: 'diretoria',
     label: 'Diretoria',
-    templatePath: '/templates/cartao-diretoria.png',
+    templatePath: `${ASSET_BASE}templates/cartao-diretoria.png`,
     templateHint: 'templates/cartao_base_limpo_diretoria.png',
     subject: 'Parabens ao membro da Diretoria',
     bodyTitle: 'Parabens ao membro da Diretoria',
@@ -30,6 +32,71 @@ const PROFILES = {
       'Fluxo especifico para a Diretoria, com lista propria, layout anual proprio e mensagem dedicada.',
     nameBox: { x: 430, y: 665, width: 1115, height: 145, align: 'center' },
   },
+}
+
+const SAMPLE_ROWS = {
+  associado: [
+    {
+      nome: 'Paula da Silveira Delvalhas',
+      tabelionato: 'Tabelionato Pozo - Sao Vicente do Sul',
+      email: 'paula@email.com',
+      data_aniversario: '27/04',
+    },
+    {
+      nome: 'Jorge Alberto Pozo Camargo',
+      tabelionato: 'Tabelionato Pozo - Sao Vicente do Sul',
+      email: 'jorge@email.com',
+      data_aniversario: '27/04',
+    },
+  ],
+  diretoria: [
+    {
+      nome: 'Joao Ricardo Souza',
+      tabelionato: 'Diretoria CNB/RS',
+      email: 'joao.ricardo@email.com',
+      data_aniversario: '27/04',
+    },
+    {
+      nome: 'Mariana Costa Ferreira',
+      tabelionato: 'Diretoria CNB/RS',
+      email: 'mariana.ferreira@email.com',
+      data_aniversario: '05/05',
+    },
+  ],
+}
+
+const SAMPLE_HISTORY = {
+  associado: [
+    {
+      timestamp: '2026-04-27T08:00:00',
+      data_referencia: '27/04/2026',
+      nome: 'Paula da Silveira Delvalhas',
+      email: 'paula@email.com',
+      status: 'enviado',
+      detalhes: 'Cartao enviado com sucesso pelo Outlook.',
+      arquivo_cartao_url: null,
+    },
+    {
+      timestamp: '2026-04-27T08:03:00',
+      data_referencia: '27/04/2026',
+      nome: 'Jorge Alberto Pozo Camargo',
+      email: 'jorge@email.com',
+      status: 'rascunho',
+      detalhes: 'Rascunho aberto para conferencia.',
+      arquivo_cartao_url: null,
+    },
+  ],
+  diretoria: [
+    {
+      timestamp: '2026-04-27T08:10:00',
+      data_referencia: '27/04/2026',
+      nome: 'Joao Ricardo Souza',
+      email: 'joao.ricardo@email.com',
+      status: 'enviado',
+      detalhes: 'Parabens ao membro da Diretoria enviado com sucesso.',
+      arquivo_cartao_url: null,
+    },
+  ],
 }
 
 const monthNames = [
@@ -129,22 +196,39 @@ async function renderBirthdayCard(name, profile, templateVersion) {
 }
 
 function App() {
+  const isScreenshotMode = Boolean(SCREENSHOT_MODE)
   const [currentProfileId, setCurrentProfileId] = useState('associado')
-  const [rows, setRows] = useState([])
-  const [fileName, setFileName] = useState('')
+  const [rows, setRows] = useState(isScreenshotMode ? SAMPLE_ROWS.associado : [])
+  const [fileName, setFileName] = useState(
+    isScreenshotMode ? 'aniversariantes_associado.xlsx' : '',
+  )
   const [error, setError] = useState('')
-  const [selectedRowIndex, setSelectedRowIndex] = useState(null)
-  const [previewName, setPreviewName] = useState(DEFAULT_PREVIEW_NAME)
+  const [selectedRowIndex, setSelectedRowIndex] = useState(isScreenshotMode ? 0 : null)
+  const [previewName, setPreviewName] = useState(
+    isScreenshotMode ? SAMPLE_ROWS.associado[0].nome : DEFAULT_PREVIEW_NAME,
+  )
   const [previewCardUrl, setPreviewCardUrl] = useState('')
   const [templateVersion, setTemplateVersion] = useState(0)
   const [senderEmail, setSenderEmail] = useState('luis.dias@cnbrs.org.br')
-  const [uploadStatus, setUploadStatus] = useState('')
-  const [templateStatus, setTemplateStatus] = useState('')
-  const [automationStatus, setAutomationStatus] = useState('')
-  const [automationOutput, setAutomationOutput] = useState([])
+  const [uploadStatus, setUploadStatus] = useState(
+    isScreenshotMode ? 'Planilha salva com sucesso no perfil associado.' : '',
+  )
+  const [templateStatus, setTemplateStatus] = useState(
+    isScreenshotMode ? 'Template PSD processado e base limpa atualizada.' : '',
+  )
+  const [automationStatus, setAutomationStatus] = useState(
+    isScreenshotMode ? 'Fluxo demonstrativo pronto para abrir rascunho ou enviar.' : '',
+  )
+  const [automationOutput, setAutomationOutput] = useState(
+    isScreenshotMode ? ['Paula da Silveira Delvalhas <paula@email.com>: enviado'] : [],
+  )
   const [isRunningAutomation, setIsRunningAutomation] = useState(false)
-  const [historyItems, setHistoryItems] = useState([])
-  const [historyStatus, setHistoryStatus] = useState('Carregando historico...')
+  const [historyItems, setHistoryItems] = useState(
+    isScreenshotMode ? SAMPLE_HISTORY.associado : [],
+  )
+  const [historyStatus, setHistoryStatus] = useState(
+    isScreenshotMode ? '' : 'Carregando historico...',
+  )
 
   const currentProfile = PROFILES[currentProfileId]
 
@@ -194,6 +278,10 @@ function App() {
   }, [previewName, currentProfile, templateVersion])
 
   useEffect(() => {
+    if (isScreenshotMode) {
+      return undefined
+    }
+
     let active = true
 
     async function loadHistory() {
@@ -228,7 +316,7 @@ function App() {
     return () => {
       active = false
     }
-  }, [currentProfileId])
+  }, [currentProfileId, isScreenshotMode])
 
   function resetStatuses() {
     setError('')
@@ -240,14 +328,23 @@ function App() {
 
   function handleProfileChange(profileId) {
     setCurrentProfileId(profileId)
-    setRows([])
-    setFileName('')
-    setSelectedRowIndex(null)
-    setPreviewName(DEFAULT_PREVIEW_NAME)
+    if (isScreenshotMode) {
+      setRows(SAMPLE_ROWS[profileId])
+      setFileName(`aniversariantes_${profileId}.xlsx`)
+      setSelectedRowIndex(0)
+      setPreviewName(SAMPLE_ROWS[profileId][0]?.nome || DEFAULT_PREVIEW_NAME)
+      setHistoryItems(SAMPLE_HISTORY[profileId] || [])
+      setHistoryStatus('')
+    } else {
+      setRows([])
+      setFileName('')
+      setSelectedRowIndex(null)
+      setPreviewName(DEFAULT_PREVIEW_NAME)
+      setHistoryItems([])
+      setHistoryStatus('Carregando historico...')
+    }
     setPreviewCardUrl('')
     resetStatuses()
-    setHistoryItems([])
-    setHistoryStatus('Carregando historico...')
   }
 
   async function saveExcelOnServer(file) {
@@ -386,6 +483,20 @@ function App() {
   }
 
   async function runAutomation(mode) {
+    if (isScreenshotMode) {
+      setAutomationStatus(
+        mode === 'send'
+          ? 'Demo: envio automatico exibido apenas para captura do portfolio.'
+          : 'Demo: rascunho do Outlook simulado para a captura do portfolio.',
+      )
+      setAutomationOutput(
+        mode === 'send'
+          ? ['Paula da Silveira Delvalhas <paula@email.com>: enviado']
+          : ['Paula da Silveira Delvalhas <paula@email.com>: rascunho'],
+      )
+      return
+    }
+
     setIsRunningAutomation(true)
     setAutomationStatus(
       mode === 'send'
@@ -427,8 +538,14 @@ function App() {
     }
   }
 
+  const showOverviewSection = !SCREENSHOT_MODE || SCREENSHOT_MODE === 'overview'
+  const showPreviewSection = !SCREENSHOT_MODE || SCREENSHOT_MODE === 'preview'
+  const showHistorySection = !SCREENSHOT_MODE || SCREENSHOT_MODE === 'history'
+
   return (
     <main className="page-shell">
+      {showOverviewSection ? (
+        <>
       <section className="hero-panel">
         <div className="hero-copy">
           <span className="eyebrow">Portfolio com 2 fluxos</span>
@@ -509,7 +626,11 @@ function App() {
           <small>Comparacao com {stats.todayKey}</small>
         </article>
       </section>
+        </>
+      ) : null}
 
+      {showPreviewSection ? (
+        <>
       <section className="preview-panel">
         <div className="preview-copy">
           <div>
@@ -651,7 +772,11 @@ function App() {
           ) : null}
         </aside>
       </section>
+        </>
+      ) : null}
 
+      {showHistorySection ? (
+        <>
       <section className="history-panel">
         <div className="table-header">
           <div>
@@ -773,6 +898,8 @@ function App() {
           </div>
         )}
       </section>
+        </>
+      ) : null}
     </main>
   )
 }

@@ -56,6 +56,20 @@ Nao e apenas um CRUD. E um sistema que automatiza uma tarefa administrativa conc
 - composicao do e-mail com imagem no corpo
 - historico de envios com acesso ao cartao gerado
 
+### Interface Screenshots
+
+#### 1. Dashboard e configuracao do fluxo
+
+![Dashboard do sistema](docs/screenshots/overview.png)
+
+#### 2. Previa do cartao e composicao do e-mail
+
+![Previa do cartao e e-mail](docs/screenshots/preview.png)
+
+#### 3. Historico de envios e lista de aniversariantes
+
+![Historico e tabela de aniversariantes](docs/screenshots/history.png)
+
 ### Sample Cards
 
 #### Associado
