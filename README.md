@@ -46,6 +46,26 @@ Nao e apenas um CRUD. E um sistema que automatiza uma tarefa administrativa conc
 - alternancia entre `Associado` e `Diretoria`
 - launcher local em modo aplicativo no Windows
 
+## Visual Preview
+
+### Interface Workflow
+
+- importacao da planilha Excel por perfil
+- upload do template anual em PSD
+- geracao da previa do cartao com nome dinamico
+- composicao do e-mail com imagem no corpo
+- historico de envios com acesso ao cartao gerado
+
+### Sample Cards
+
+#### Associado
+
+![Cartao Associado](frontend/public/templates/cartao-associado.png)
+
+#### Diretoria
+
+![Cartao Diretoria](frontend/public/templates/cartao-diretoria.png)
+
 ## Architecture
 
 ```mermaid
@@ -63,16 +83,16 @@ flowchart LR
 
 ```text
 birthday-card-automation/
-├── app/                # build publicado localmente no Apache
-├── automacao/          # scripts Python
-├── backend/            # endpoints PHP
-├── docs/               # exemplos sanitizados
-├── frontend/           # interface React + Vite
-├── gerados/            # runtime: cartoes gerados
-├── logs/               # runtime: historico CSV
-├── templates/          # bases limpas dos cartoes
-├── uploads/            # runtime: planilhas
-└── abrir-cartoes.cmd   # launcher Windows em modo app
+|-- app/                # build publicado localmente no Apache
+|-- automacao/          # scripts Python
+|-- backend/            # endpoints PHP
+|-- docs/               # exemplos sanitizados
+|-- frontend/           # interface React + Vite
+|-- gerados/            # runtime: cartoes gerados
+|-- logs/               # runtime: historico CSV
+|-- templates/          # bases limpas dos cartoes
+|-- uploads/            # runtime: planilhas
+`-- abrir-cartoes.cmd   # launcher Windows em modo app
 ```
 
 ## Supported Flows
@@ -99,8 +119,8 @@ nome | tabelionato | email | data_aniversario
 
 Exemplos sanitizados:
 
-- [docs/exemplos/associado.csv](C:\xampp\htdocs\projeto-aniversario\docs\exemplos\associado.csv)
-- [docs/exemplos/diretoria.csv](C:\xampp\htdocs\projeto-aniversario\docs\exemplos\diretoria.csv)
+- `docs/exemplos/associado.csv`
+- `docs/exemplos/diretoria.csv`
 
 ## How It Works
 
@@ -110,6 +130,13 @@ Exemplos sanitizados:
 4. Conferir a previa do cartao
 5. Abrir rascunho ou enviar pelo Outlook
 6. Consultar o historico visual de execucao
+
+## Demo Highlights
+
+- `Associado` e `Diretoria` funcionam no mesmo painel, com regras diferentes
+- o Outlook e usado como canal real de envio, sem depender de senha SMTP no codigo
+- o cartao anual pode ser trocado sem reescrever o sistema
+- o fluxo foi pensado para rodar automaticamente as `08:00` no Windows
 
 ## Local Development
 
