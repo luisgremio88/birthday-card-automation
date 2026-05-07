@@ -17,9 +17,12 @@ $payload = json_decode($rawInput ?: '{}', true);
 $profile = (string) ($payload['profile'] ?? 'associado');
 $config = profileConfig($profile);
 $mode = $payload['mode'] ?? 'draft';
-$senderEmail = trim((string) ($payload['senderEmail'] ?? 'luis.dias@cnbrs.org.br'));
+$emailDefaults = emailDefaults();
+$senderEmail = trim((string) ($payload['senderEmail'] ?? $emailDefaults['senderEmail']));
+$bccEmail = trim((string) ($payload['bccEmail'] ?? $emailDefaults['bccEmail']));
 
 $scriptPath = projectRoot() . DIRECTORY_SEPARATOR . 'automacao' . DIRECTORY_SEPARATOR . 'enviar_aniversarios.py';
+$pythonPath = getenv('CODEX_PYTHON') ?: 'C:\\Users\\Suporte\\anaconda3\\python.exe';
 
 if (!is_file($scriptPath)) {
     jsonResponse([
@@ -29,12 +32,14 @@ if (!is_file($scriptPath)) {
 }
 
 $commandParts = [
-    'python',
+    escapeshellarg($pythonPath),
     escapeshellarg($scriptPath),
     '--profile',
     escapeshellarg($profile),
     '--sender-email',
     escapeshellarg($senderEmail),
+    '--bcc-email',
+    escapeshellarg($bccEmail),
 ];
 
 if ($mode === 'send') {

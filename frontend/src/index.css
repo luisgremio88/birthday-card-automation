@@ -1,25 +1,25 @@
 :root {
-  --text: #5c534d;
-  --text-soft: #7c7068;
-  --text-h: #1e1612;
-  --bg: #f7efe8;
+  --text: #4d565a;
+  --text-soft: #6c777c;
+  --text-h: #162229;
+  --bg: #f3f7f8;
   --panel: rgba(255, 255, 255, 0.88);
-  --border: #e8d9cd;
-  --border-strong: #d8b8a1;
-  --code-bg: #fff4e9;
+  --border: #d9e5e8;
+  --border-strong: #a9c2ca;
+  --code-bg: #eef8fb;
   --accent-soft: rgba(255, 123, 84, 0.14);
   --accent-strong: #ad4d2c;
-  --table-head: rgba(255, 242, 232, 0.92);
-  --table-hover: rgba(255, 248, 243, 0.92);
+  --table-head: rgba(235, 247, 250, 0.92);
+  --table-hover: rgba(242, 249, 250, 0.92);
   --shadow:
-    rgba(126, 91, 66, 0.08) 0 24px 60px -24px, rgba(100, 63, 40, 0.08) 0 10px 24px -18px;
+    rgba(36, 76, 91, 0.1) 0 24px 60px -24px, rgba(44, 79, 91, 0.08) 0 10px 24px -18px;
 
   --sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --heading: Georgia, 'Times New Roman', serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 16px/145% var(--sans);
+  letter-spacing: 0;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -36,16 +36,16 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, rgba(255, 193, 143, 0.55), transparent 28%),
-    radial-gradient(circle at top right, rgba(255, 123, 84, 0.18), transparent 24%),
-    linear-gradient(180deg, #fff9f3, #f6eee7 52%, #f2e7dd);
+    linear-gradient(140deg, rgba(255, 236, 219, 0.62), transparent 32%),
+    linear-gradient(220deg, rgba(204, 235, 242, 0.8), transparent 34%),
+    linear-gradient(180deg, #f7fbfc, #eef5f7 52%, #e9f0f2);
 }
 
 #root {
   width: 1180px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 40px 20px 56px;
+  padding: 24px 18px 40px;
   text-align: center;
   min-height: 100svh;
   box-sizing: border-box;
@@ -60,18 +60,18 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(42px, 6vw, 72px);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.05;
+  letter-spacing: 0;
   margin: 0;
   @media (max-width: 1024px) {
     font-size: 36px;
   }
 }
 h2 {
-  font-size: 28px;
+  font-size: 22px;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   margin: 0 0 8px;
 }
 p {

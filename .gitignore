@@ -13,11 +13,13 @@ app/templates/
 uploads/*.xlsx
 uploads/*.xls
 logs/*.csv
+logs/*.txt
 gerados/**/*.png
 gerados/**/*.jpg
 gerados/**/*.jpeg
 gerados/**/*.webp
 gerados/**/*.pdf
+config/email_defaults.json
 
 # Keep folder structure
 !uploads/.gitkeep
@@ -25,6 +27,7 @@ gerados/**/*.pdf
 !gerados/.gitkeep
 
 # Temporary / local templates
+templates/*.psd
 templates/teste-template.psd
 templates/diretoria-orig.png
 

@@ -45,6 +45,11 @@ Nao e apenas um CRUD. E um sistema que automatiza uma tarefa administrativa conc
 - link para abrir o cartao gerado
 - alternancia entre `Associado` e `Diretoria`
 - launcher local em modo aplicativo no Windows
+- painel de proximos aniversarios
+- historico recolhivel para manter a tela principal limpa
+- mensagens de erro tratadas para falhas do Outlook/PHP
+- trava contra execucao duplicada no mesmo dia
+- configuracao local de e-mails fora do Git
 
 ## Visual Preview
 
@@ -56,20 +61,6 @@ Nao e apenas um CRUD. E um sistema que automatiza uma tarefa administrativa conc
 - composicao do e-mail com imagem no corpo
 - historico de envios com acesso ao cartao gerado
 - todas as capturas do README usam dados ficticios
-
-### Interface Screenshots
-
-#### 1. Dashboard e configuracao do fluxo
-
-![Dashboard do sistema](docs/screenshots/overview.png)
-
-#### 2. Previa do cartao e composicao do e-mail
-
-![Previa do cartao e e-mail](docs/screenshots/preview.png)
-
-#### 3. Historico de envios e lista de aniversariantes
-
-![Historico e tabela de aniversariantes](docs/screenshots/history.png)
 
 ### Sample Cards
 
@@ -189,6 +180,26 @@ Esse launcher:
 - `backend/upload_template.php`
 - `backend/run_automation.php`
 - `backend/history.php`
+- `backend/config.php`
+
+## Local Configuration
+
+Para uso real no computador local, copie o exemplo:
+
+```bash
+copy config\email_defaults.example.json config\email_defaults.json
+```
+
+Depois ajuste os e-mails no arquivo local:
+
+```json
+{
+  "senderEmail": "aniversarios@exemplo.com",
+  "bccEmail": "auditoria@exemplo.com"
+}
+```
+
+O arquivo `config/email_defaults.json` fica ignorado no Git para evitar expor e-mails reais.
 
 ## Python Automation
 
@@ -234,6 +245,8 @@ O repositorio foi organizado para nao subir dados reais:
 - logs reais ficam ignorados
 - cartoes gerados ficam ignorados
 - arquivos temporarios locais ficam ignorados
+- dados de demonstracao devem ser ficticios
+- configuracao real de e-mails fica ignorada
 
 Antes de publicar, revise se nao existe nenhum dado sensivel fora do `.gitignore`.
 

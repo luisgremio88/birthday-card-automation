@@ -1,3 +1,4 @@
-nome,tabelionato,email,data_aniversario
-Alan Lanzarin,Diretoria CNB/RS,alan@exemplo.com,27/04
-Joao Ricardo Souza,Diretoria CNB/RS,joao@exemplo.com,16/04
+nome,tabelionato,email,data_aniversario,diretores
+Fernanda Exemplo,Diretoria Institucional,fernanda.exemplo@empresa.com,07/05,sim
+Roberto Modelo,Diretoria Institucional,roberto.modelo@empresa.com,24/05,sim
+Daniela Demo,Diretoria Institucional,daniela.demo@empresa.com,30/05,sim
